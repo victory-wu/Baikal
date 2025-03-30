@@ -106,6 +106,7 @@ class IMipPlugin extends DAV\ServerPlugin
             $recipient = $iTipMessage->recipientName.' <'.$recipient.'>';
         }
 
+        // 2025年3月30日 扩展邮件的前缀描述
         $subject = 'SabreDAV iTIP message';
         switch (strtoupper($iTipMessage->method)) {
             case 'REPLY':
@@ -142,6 +143,7 @@ class IMipPlugin extends DAV\ServerPlugin
                 break;
         }
 
+        // 2025年3月30日 将发件人从 noreply 改为原始发件人
         $headers = [
             'Reply-To: '.$sender,
 //            'From: '.$iTipMessage->senderName.' <'.$this->senderEmail.'>',

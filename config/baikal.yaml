@@ -1,0 +1,23 @@
+system:
+    configured_version: 0.10.1
+    timezone: Asia/Shanghai
+    card_enabled: true
+    cal_enabled: true
+    dav_auth_type: Basic
+    admin_passwordhash: c5c8aad193b35abb041407a27e76cb563196496c5d11ec3081fdb6110db67ba2
+    failed_access_message: 'user %u authentication failure for Baikal'
+    auth_realm: BaikalDAV
+    base_uri: ''
+    invite_from: 447874253@qq.com
+database:
+    sqlite_file: 'D:\temp\baikal/Specific/db/db.sqlite'
+    backend: sqlite
+    mysql_host: '58.215.75.235:10006'
+    mysql_dbname: baikal
+    mysql_username: scrm
+    mysql_password: k^0aEvmUL3HvQew0
+    encryption_key: 7b78287a1ed6fa83c656445ed7f8fe69
+    pgsql_host: ''
+    pgsql_dbname: ''
+    pgsql_username: ''
+    pgsql_password: ''

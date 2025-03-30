@@ -502,7 +502,9 @@ class Plugin extends ServerPlugin
         $broker = $this->createITipBroker();
         $newObject = $broker->processMessage($iTipMessage, $currentObject);
 
-        $inbox->createFile($newFileName, $iTipMessage->message->serialize());
+        // changed 禁用自动创建事件 2025年3月30日
+        // 如果是同系统里面的用户，会自动为其他与会用户创建相同事件
+        // $inbox->createFile($newFileName, $iTipMessage->message->serialize());
 
         if (!$newObject) {
             // We received an iTip message referring to a UID that we don't
@@ -521,7 +523,9 @@ class Plugin extends ServerPlugin
         // here would be nice.
         if ($isNewNode) {
             $calendar = $this->server->tree->getNodeForPath($calendarPath);
-            $calendar->createFile($newFileName, $newObject->serialize());
+            // changed 禁用自动创建事件 2025年3月30日
+            // 如果是同系统里面的用户，会自动为其他与会用户创建相同事件
+            // $calendar->createFile($newFileName, $newObject->serialize());
         } else {
             // If the message was a reply, we may have to inform other
             // attendees of this attendees status. Therefore we're shooting off

@@ -216,7 +216,7 @@ class Broker
             // The calendar object got deleted, we need to process this as a
             // cancellation / decline.
             if (!$oldCalendar) {
-                // No old and no new calendar, there's no thing to do.
+                // No old and no new calendar, there's nothing to do.
                 return [];
             }
 
@@ -242,10 +242,16 @@ class Broker
 
         if (in_array($eventInfo['organizer'], $userHref)) {
             return $this->parseEventForOrganizer($baseCalendar, $eventInfo, $oldEventInfo);
-        } elseif ($oldCalendar) {
+//        } elseif ($oldCalendar) {  // changed 2025年6月11日 删除旧日历的判断，第一次接受的时候没有旧日历，也需要创建通知（之前改过，创建新日历不同时创建与会者的日历需要等待与会者接受）
+        } else {
             // We need to figure out if the user is an attendee, but we're only
             // doing so if there's an oldCalendar, because we only want to
             // process updates, not creation of new events.
+            /*
+             * 译文：我们需要弄清楚用户是否是与会者，但我们只是
+                    如果有旧日历，则这样做，因为我们只想
+                    流程更新，而不是创建新事件。
+             */
             foreach ($eventInfo['attendees'] as $attendee) {
                 if (in_array($attendee['href'], $userHref)) {
                     return $this->parseEventForAttendee($baseCalendar, $eventInfo, $oldEventInfo, $attendee['href']);

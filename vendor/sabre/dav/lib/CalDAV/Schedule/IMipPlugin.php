@@ -98,6 +98,7 @@ class IMipPlugin extends DAV\ServerPlugin
 
         $sender = substr($iTipMessage->sender, 7);
         $recipient = substr($iTipMessage->recipient, 7);
+        $senderEmail = $sender;
 
         if ($iTipMessage->senderName) {
             $sender = $iTipMessage->senderName.' <'.$sender.'>';
@@ -158,7 +159,8 @@ class IMipPlugin extends DAV\ServerPlugin
             $recipient,
             $subject,
             $iTipMessage->message->serialize(),
-            $headers
+            $headers,
+            "-f ".$senderEmail
         );
         $iTipMessage->scheduleStatus = '1.1; Scheduling message is sent via iMip';
     }
@@ -174,9 +176,9 @@ class IMipPlugin extends DAV\ServerPlugin
      * @param string $body    iCalendar body
      * @param array  $headers List of headers
      */
-    protected function mail($to, $subject, $body, array $headers)
+    protected function mail($to, $subject, $body, array $headers, $params)
     {
-        mail($to, $subject, $body, implode("\r\n", $headers));
+        mail($to, $subject, $body, implode("\r\n", $headers), $params);
     }
 
     // @codeCoverageIgnoreEnd
